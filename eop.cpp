@@ -14,6 +14,10 @@ static constexpr char         kFEop[]    = "eop.txt";
 Eop::Eop(struct timespec utc) {
   std::string lod_str;
   eop = get_eop(utc);
+  if (eop == "") {
+    std::cout << "[ERROR] EOP data could not be found!" << std::endl;
+    std::exit(EXIT_SUCCESS);
+  }
   pm_x    = stod(eop.substr(22,  9));
   pm_y    = stod(eop.substr(41,  9));
   dut1    = stod(eop.substr(62, 10));
